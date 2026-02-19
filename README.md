@@ -34,7 +34,7 @@ Using the **CLEF CheckThat! benchmark dataset**, the system identifies which cla
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/hewanshrestha/claim-extraction-rag.git](https://github.com/hewanshrestha/claim-extraction-rag.git)
+git clone https://github.com/hewanshrestha/claim-extraction-rag.git
 cd claim-extraction-rag
 ```
 
