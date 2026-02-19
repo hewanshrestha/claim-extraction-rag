@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: .
+    # Using your exact local command, but binding to 0.0.0.0 for Docker
+    command: uv run uvicorn src.server.api:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: .
+    # Using uv run to launch the dashboard
+    command: uv run streamlit run src/interface/dashboard.py --server.port 8501 --server.address 0.0.0.0
+    environment:
+      - BACKEND_URL=http://backend:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
