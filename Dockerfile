@@ -13,7 +13,7 @@ RUN uv sync --frozen --no-install-project --no-dev
 # --- Stage 2: The Runtime ---
 FROM python:3.13-slim
 
-# IMPORTANT: We must also have uv in the runtime stage to use 'uv run'
+# We must also have uv in the runtime stage to use 'uv run'
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
