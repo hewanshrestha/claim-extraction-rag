@@ -1,0 +1,29 @@
+name: ClaimPrioritizer-CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  quality:
+    name: Linting (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Run Ruff Check
+        run: uv run ruff check .
+
+  build-check:
+    name: Docker Environment Test
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker Stack
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: docker compose build
